@@ -7,15 +7,24 @@ $(document).ready(function() {
 	
 	// set up event handlers for links    
 	$("#image_list a").click(function(evt) {
-
-		var imageURL = $(this).attr("href");
-		$("#image").attr("src", imageURL);
-				
-		var caption = $(this).attr("title");
-		$("#caption").text(caption);
-
+		// fade out the caption and image
+		$("#caption, #image").fadeOut(1000, function() {
+			var imageURL = $(this).attr("href");
+			
+			// update the image source
+			$("#image").attr("src", imageURL);
+					
+			var caption = $(this).attr("title");
+			
+			// update the caption text
+			$("#caption").text(caption);
+			
+			// fade in the caption and image
+			$("#caption, #image").fadeIn(1000);
+		});
+		
 		// cancel the default action of the link
-	    evt.preventDefault();
+		evt.preventDefault();
 	}); // end click
 	
 	// move focus to first thumbnail
